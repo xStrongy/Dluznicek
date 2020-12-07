@@ -1,11 +1,16 @@
 package com.example.dluznicek;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
@@ -26,9 +31,9 @@ public class Groups extends AppCompatActivity {
         setContentView(R.layout.activity_groups);
         list = new ArrayList<Party>();
 
-        FileInputStream fis;
+       /* FileInputStream fis;
         try {
-            fis = openFileInput("groups");
+            fis = openFileInput("groups.dat");
             ObjectInputStream ois = new ObjectInputStream(fis);
             list = (ArrayList<Party>) ois.readObject();
             ois.close();
@@ -36,26 +41,49 @@ public class Groups extends AppCompatActivity {
         catch(Exception e)
         {
             e.printStackTrace();
-        }
+        }*/
+
+        if((ArrayList<Party>) getIntent().getSerializableExtra("list") != null)
+        list = (ArrayList<Party>) getIntent().getSerializableExtra("list");
         listView = (ListView) findViewById(R.id.listView1);
 
-        ArrayAdapter arrayAdapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1, list);
-        listView.setAdapter(arrayAdapter);
-
-            Log.d("Pozdrav:", "AHOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOj**************************************");
-            if(list.size() == 0)
-                Log.d("pozdrav: ", "Pzradnyyyyyyyyyyyyyyyyyy***************************************");
-        for(Party p : list)
-        {
-            Log.d("nazevvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv", p.getName());
-        }
+        CustomListAdapter adapter = new CustomListAdapter(this, list);
+        ListView listView = (ListView) findViewById(R.id.listView1);
+        listView.setAdapter(adapter);
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Intent i = new Intent(getApplicationContext(), currentGroup.class);
+                i.putExtra("groups", list);
+                i.putExtra("position", position);
+                startActivity(i);
+            }
+        });
 
     }
 
-    public void AddGroupWindow(View view)
+    public void AddGroupWindow()
     {
         Intent i = new Intent(getApplicationContext(), AddGroup.class);
+        i.putExtra("groups", list);
         startActivity(i);
     }
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.my_menu, menu);
+        return  true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        switch(item.getItemId()){
+            case R.id.CreateGroupButton:
+                AddGroupWindow();
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
 }

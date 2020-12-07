@@ -25,10 +25,11 @@ public class AddGroup extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_group);
         groups = new ArrayList<Party>();
-
-        FileInputStream fis;
+        if((ArrayList<Party>) getIntent().getSerializableExtra("groups") != null)
+        groups = (ArrayList<Party>) getIntent().getSerializableExtra("groups");
+        /*FileInputStream fis;
         try {
-            fis = openFileInput("groups");
+            fis = openFileInput("groups.dat");
             ObjectInputStream ois = new ObjectInputStream(fis);
             groups = (ArrayList<Party>) ois.readObject();
             ois.close();
@@ -36,30 +37,35 @@ public class AddGroup extends AppCompatActivity {
         catch(Exception e)
         {
             e.printStackTrace();
-        }
+        }*/
 
     }
 
     public void CreateGroup(View view)
     {
         EditText edit = (EditText) findViewById(R.id.textBox1);
-        String name = edit.getText().toString();
-        Party p = new Party(name);
+        String partyName = edit.getText().toString();
+        EditText edit2 = (EditText) findViewById(R.id.textBox2);
+        String personName = edit2.getText().toString();
+        Party p = new Party(partyName);
+        Person pe = new Person(1, personName);
+        p.people.add(pe);
         groups.add(p);
 
-        try
+
+        /*try
         {
             FileOutputStream fileOut =
-                    new FileOutputStream("groups");
+                    new FileOutputStream("groups.dat");
             ObjectOutputStream out = new ObjectOutputStream(fileOut);
             out.writeObject(groups);
             out.close();
-            fileOut.close();
         }
         catch(Exception e) {
             e.printStackTrace();
-        }
+        }*/
         Intent i = new Intent(getApplicationContext(), Groups.class);
+        i.putExtra("list", groups);
         startActivity(i);
     }
 }

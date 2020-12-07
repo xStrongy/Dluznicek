@@ -1,8 +1,9 @@
 package com.example.dluznicek;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class Payment {
+public class Payment implements Serializable {
     public int price;
     public String description;
     ArrayList<Person> people = new ArrayList<Person>();
