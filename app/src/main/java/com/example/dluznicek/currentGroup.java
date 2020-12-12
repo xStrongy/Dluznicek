@@ -20,6 +20,7 @@ public class currentGroup extends AppCompatActivity {
     ArrayList<Party> list = new ArrayList<Party>();
     Party party;
     ListView listView;
+    ListView listView2;
     int pos;
 
     @Override
@@ -37,8 +38,13 @@ public class currentGroup extends AppCompatActivity {
         listView = (ListView) findViewById(R.id.listView1);
         listView.setAdapter(adapter);
         TextView textView = (TextView) findViewById(R.id.textView8);
-        //String finalPrice = party.getFinalPrice();
         textView.setText(String.valueOf(party.getFinalPrice()));
+        if(party.payments.size() != 0)
+        {
+             CustomListAdapter4 adapter2 = new CustomListAdapter4(this, party.payments);
+             listView2 = (ListView) findViewById(R.id.listViewPayments);
+             listView2.setAdapter(adapter2);
+        }
 
     }
 

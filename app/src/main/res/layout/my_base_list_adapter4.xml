@@ -11,7 +11,7 @@
     <TextView
         android:id="@+id/item_name"
         android:layout_width="match_parent"
-        android:layout_height="50px"
+        android:layout_height="45px"
         android:textSize="30px"
         android:textAlignment="center" />
 

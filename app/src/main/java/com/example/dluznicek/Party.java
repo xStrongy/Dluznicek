@@ -34,4 +34,14 @@ public class Party implements Serializable {
         }
         return soucet;
     }
+
+    public Person getPersonWithId(int id)
+    {
+        for (Person p : people) {
+            if(p.getId() == id)
+                return p;
+        }
+        return null;
+    }
+
 }

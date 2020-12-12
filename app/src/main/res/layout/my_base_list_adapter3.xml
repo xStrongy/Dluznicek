@@ -8,12 +8,14 @@
 
 
 
-    <TextView
+    <CheckedTextView
         android:id="@+id/item_name"
         android:layout_width="match_parent"
-        android:layout_height="50px"
-        android:textSize="30px"
+        android:layout_height="70px"
+        android:textSize="50px"
+        android:checkMark="?android:attr/listChoiceIndicatorMultiple"
         android:textAlignment="center" />
+
 
 
 </LinearLayout>
