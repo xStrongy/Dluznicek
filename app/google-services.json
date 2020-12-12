@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "11900889341",
+    "firebase_url": "https://dluznicek-e291a-default-rtdb.europe-west1.firebasedatabase.app",
+    "project_id": "dluznicek-e291a",
+    "storage_bucket": "dluznicek-e291a.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:11900889341:android:20d7b7401d9cbc0db3b694",
+        "android_client_info": {
+          "package_name": "com.example.dluznicek"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "11900889341-ejevodliv669tae20hkeq1bk17a1q55l.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.dluznicek",
+            "certificate_hash": "ef8578eb94b5f93adf94086885bb55cfa024f6b2"
+          }
+        },
+        {
+          "client_id": "11900889341-tctvi0oq9cderku19mr25nnb8gikcm9p.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAMcsvkGzWtzxpTuBqCBo23g4ZkBEaNlV0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "11900889341-tctvi0oq9cderku19mr25nnb8gikcm9p.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

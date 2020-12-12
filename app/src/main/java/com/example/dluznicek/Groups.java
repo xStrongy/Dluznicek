@@ -6,9 +6,11 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.GestureDetector;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -31,20 +33,11 @@ public class Groups extends AppCompatActivity {
         setContentView(R.layout.activity_groups);
         list = new ArrayList<Party>();
 
-       /* FileInputStream fis;
-        try {
-            fis = openFileInput("groups.dat");
-            ObjectInputStream ois = new ObjectInputStream(fis);
-            list = (ArrayList<Party>) ois.readObject();
-            ois.close();
-        }
-        catch(Exception e)
-        {
-            e.printStackTrace();
-        }*/
 
-        if((ArrayList<Party>) getIntent().getSerializableExtra("list") != null)
-        list = (ArrayList<Party>) getIntent().getSerializableExtra("list");
+        //if((ArrayList<Party>) getIntent().getSerializableExtra("list") != null)
+        //list = (ArrayList<Party>) getIntent().getSerializableExtra("list");
+        if(PrefConfig.readListFromPref(this) != null)
+        list = PrefConfig.readListFromPref(this);
         listView = (ListView) findViewById(R.id.listView1);
 
         CustomListAdapter adapter = new CustomListAdapter(this, list);

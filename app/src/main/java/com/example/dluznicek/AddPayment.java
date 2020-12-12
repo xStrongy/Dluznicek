@@ -7,6 +7,8 @@ import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.CheckedTextView;
 import android.widget.EditText;
 import android.widget.ListView;
@@ -52,13 +54,16 @@ public class AddPayment extends AppCompatActivity {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 int idPaid = party.people.get(position).getId();
 
+
                 String [] parseLine = textViewPeoplePaid.getText().toString().split(" ");
                 int tempId = Integer.parseInt(parseLine[0]);
                 if(peoplePaidId.contains(idPaid)){
                     peoplePaidId.remove((Object) idPaid);
+
                 }
                 else if(!peoplePaidId.contains(idPaid) && idPaid != tempId)
                     peoplePaidId.add(idPaid);
+
             }
         });
     }
@@ -82,6 +87,17 @@ public class AddPayment extends AppCompatActivity {
                 textView.setVisibility(View.VISIBLE);
                 EditText editText = (EditText) findViewById(R.id.editTextNumber);
                 editText.setVisibility(View.VISIBLE);
+                TextView tv2 = (TextView) findViewById(R.id.textView16);
+                tv2.setVisibility(View.VISIBLE);
+                EditText editText2 = (EditText) findViewById(R.id.editTextDesc);
+                editText2.setVisibility(View.VISIBLE);
+                TextView tv3 = (TextView) findViewById(R.id.textView15);
+                tv3.setVisibility(View.VISIBLE);
+                ListView listView1 = (ListView) findViewById(R.id.listView10);
+                listView1.setVisibility(View.VISIBLE);
+                Button button = (Button) findViewById(R.id.button7);
+                button.setVisibility(View.VISIBLE);
+
                 return false;
             }
         });
@@ -100,6 +116,15 @@ public class AddPayment extends AppCompatActivity {
         for (Integer i : peoplePaidId) {
             peoplePaid.add(party.getPersonWithId(i));
         }
+
+        Validator validator = new Validator();
+        if(validator.isNullorWhiteChar(desc) == true)
+        {
+            TextView textView = (TextView) findViewById(R.id.textView17);
+            textView.setVisibility(View.VISIBLE);
+            return;
+        }
+
 
         double splittedCastka = castka / peoplePaid.size();
 
@@ -123,6 +148,8 @@ public class AddPayment extends AppCompatActivity {
         i.putExtra("groups", list);
         i.putExtra("position", pos);
         startActivity(i);
+
+
 
     }
 

@@ -50,12 +50,25 @@ public class currentGroup extends AppCompatActivity {
 
     public void AddPersonToGroup(View view)
     {
+        TextView textView = (TextView) findViewById(R.id.textView18);
         EditText edit = (EditText) findViewById(R.id.textBox1);
         String PersonNickname = edit.getText().toString();
         int NewPersonId = party.getLastId() + 1;
         Person p = new Person(NewPersonId, PersonNickname);
+
+
+        Validator validator = new Validator();
+        if(validator.isNullorWhiteChar(edit.getText().toString()) == true)
+        {
+            textView.setVisibility(View.VISIBLE);
+            return;
+        }
+        else
+        {
+            textView.setVisibility(View.INVISIBLE);
+            edit.setText("");
+        }
         party.people.add(p);
-        edit.setText("");
         listView = (ListView) findViewById(R.id.listView1);
         CustomListAdapter2 adapter = ( CustomListAdapter2)listView.getAdapter();
         adapter.notifyDataSetChanged();
@@ -63,9 +76,11 @@ public class currentGroup extends AppCompatActivity {
 
     public void SaveParty(View view)
     {
+
         list.set(pos, party);
         Intent i = new Intent(getApplicationContext(), Groups.class);
-        i.putExtra("list", list);
+        //i.putExtra("list", list);
+        PrefConfig.writeListInPref(getApplicationContext(), list);
         startActivity(i);
     }
 

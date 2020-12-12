@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.os.Environment;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.TextView;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -47,25 +48,31 @@ public class AddGroup extends AppCompatActivity {
         String partyName = edit.getText().toString();
         EditText edit2 = (EditText) findViewById(R.id.textBox2);
         String personName = edit2.getText().toString();
+        Validator validator = new Validator();
+        String groupName = edit.getText().toString();
+        if(validator.isNullorWhiteChar(groupName) == true)
+        {
+            TextView textView = (TextView) findViewById(R.id.textView19);
+            textView.setText("Musis vyplnit název skupiny");
+            textView.setVisibility(View.VISIBLE);
+            return;
+        }
+        if(validator.groupExists(groupName, groups) == true)
+        {
+            TextView textView = (TextView) findViewById(R.id.textView19);
+            textView.setText("Skupina z danym nazvem uz existuje");
+            textView.setVisibility(View.VISIBLE);
+            return;
+        }
         Party p = new Party(partyName);
         Person pe = new Person(1, personName);
         p.people.add(pe);
         groups.add(p);
 
 
-        /*try
-        {
-            FileOutputStream fileOut =
-                    new FileOutputStream("groups.dat");
-            ObjectOutputStream out = new ObjectOutputStream(fileOut);
-            out.writeObject(groups);
-            out.close();
-        }
-        catch(Exception e) {
-            e.printStackTrace();
-        }*/
         Intent i = new Intent(getApplicationContext(), Groups.class);
-        i.putExtra("list", groups);
+        //i.putExtra("list", groups);
+        PrefConfig.writeListInPref(getApplicationContext(), groups);
         startActivity(i);
     }
 }
