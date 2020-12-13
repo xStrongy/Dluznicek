@@ -53,7 +53,11 @@ public class currentGroup extends AppCompatActivity {
         TextView textView = (TextView) findViewById(R.id.textView18);
         EditText edit = (EditText) findViewById(R.id.textBox1);
         String PersonNickname = edit.getText().toString();
-        int NewPersonId = party.getLastId() + 1;
+        int NewPersonId;
+        if(party.people.size() == 0)
+            NewPersonId = 1;
+        else
+            NewPersonId = party.getLastId() + 1;
         Person p = new Person(NewPersonId, PersonNickname);
 
 

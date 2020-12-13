@@ -4,6 +4,11 @@ public class Autenticathion {
     private String username;
     private String password;
 
+    public Autenticathion()
+    {
+        this.username = null;
+        this.password = null;
+    }
     public Autenticathion(String u, String p)
     {
         this.username = u;

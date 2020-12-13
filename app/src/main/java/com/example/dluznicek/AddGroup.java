@@ -46,8 +46,6 @@ public class AddGroup extends AppCompatActivity {
     {
         EditText edit = (EditText) findViewById(R.id.textBox1);
         String partyName = edit.getText().toString();
-        EditText edit2 = (EditText) findViewById(R.id.textBox2);
-        String personName = edit2.getText().toString();
         Validator validator = new Validator();
         String groupName = edit.getText().toString();
         if(validator.isNullorWhiteChar(groupName) == true)
@@ -65,8 +63,6 @@ public class AddGroup extends AppCompatActivity {
             return;
         }
         Party p = new Party(partyName);
-        Person pe = new Person(1, personName);
-        p.people.add(pe);
         groups.add(p);
 
 

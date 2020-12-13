@@ -4,4 +4,6 @@
 
     <item android:title="Pridat skupinu"
         android:id="@+id/CreateGroupButton"/>
+    <item android:title="Odhlasit se"
+        android:id="@+id/Logout"/>/>
 </menu>

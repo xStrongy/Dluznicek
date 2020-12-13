@@ -72,9 +72,14 @@ public class Groups extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         switch(item.getItemId()){
-            case R.id.CreateGroupButton:
+            case R.id.CreateGroupButton:{
                 AddGroupWindow();
+                return true; }
+            case R.id.Logout: {
+                Intent i = new Intent(getApplicationContext(), MainActivity.class);
+                startActivity(i);
                 return true;
+            }
             default:
                 return super.onOptionsItemSelected(item);
         }
